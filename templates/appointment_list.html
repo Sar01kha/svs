@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Appointments - SVS{% endblock %}
+
+{% block content %}
+<h2>Appointments</h2>
+<p class="small text-muted">Oldest first. Future appointments are highlighted.</p>
+
+<table class="table table-striped align-middle">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Date &amp; Time</th>
+      <th>Customer</th>
+      <th>Services (with cost)</th>
+      <th class="text-end">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for a in appts %}
+    <!-- Different colour for future appointments -->
+    <tr class="{% if a.is_future %}table-success{% endif %}">
+      <td>{{ a.appt_id }}</td>
+      <td>{{ a.appt_datetime }}</td>
+      <td>
+        <a href="{{ url_for('customer_appointment', customer_id=a.customer_id) }}">
+          {{ a.family_name }}, {{ a.first_name }}
+        </a>
+      </td>
+      <td>{{ a.services_with_costs or '-' }}</td>
+      <td class="text-end">{{ "%.2f"|format(a.total_cost or 0) }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% if not appts %}
+  <p class="text-muted">No appointments found.</p>
+{% endif %}
+{% endblock %}

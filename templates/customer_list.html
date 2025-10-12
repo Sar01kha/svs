@@ -1,12 +1,54 @@
 {% extends "base.html" %}
-
 {% block title %}Customers - SVS{% endblock %}
 
 {% block content %}
-
-
 <h2>Customers</h2>
 
-<!-- Display a list of customers and their details as specified in assessment brief -->
+<form method="get" action="{{ url_for('customer_list') }}" class="mb-3">
+  <div class="input-group" style="max-width:480px;">
+    <input type="text" name="q" class="form-control" placeholder="Search name, email, or phone"
+           value="{{ q or '' }}">
+    <button class="btn btn-primary" type="submit">Search</button>
+    {% if q %}
+      <a class="btn btn-outline-secondary" href="{{ url_for('customer_list') }}">Reset</a>
+    {% endif %}
+  </div>
+</form>
 
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Family name</th>
+      <th>First name</th>
+      <th>Contact</th>
+      <th>Date joined</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for c in customers %}
+    <tr>
+      <td>{{ c.customer_id }}</td>
+      <td>
+        <a href="{{ url_for('customer_appointment', customer_id=c.customer_id) }}">
+          {{ c.family_name }}
+        </a>
+      </td>
+      <td>{{ c.first_name }}</td>
+      <td>
+        {% if c.email %}<div>{{ c.email }}</div>{% endif %}
+        <div>{{ c.phone }}</div>
+      </td>
+      <td>{{ c.date_joined.strftime('%d/%m/%Y') }}</td>
+      <td>
+        <a class="btn btn-sm btn-outline-primary"
+           href="{{ url_for('customer_appointment', customer_id=c.customer_id) }}">
+           View appointments
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Customer Appointment - SVS{% endblock %}
+
+{% block content %}
+<a class="btn btn-link p-0 mb-3" href="{{ url_for('customer_list') }}">&larr; Back to customers</a>
+
+{% if customer %}
+  <h2>{{ customer.family_name }}, {{ customer.first_name }}</h2>
+  <p>
+    {% if customer.email %}<strong>Email:</strong> {{ customer.email }}<br>{% endif %}
+    <strong>Phone:</strong> {{ customer.phone }}<br>
+    <strong>Date joined:</strong> {{ customer.date_joined }}
+  </p>
+
+  <h4 class="mt-4">Appointment Summary</h4>
+  {% if appts %}
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Date &amp; Time</th>
+          <th>Services</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for a in appts %}
+        <tr>
+          <td>{{ a.appt_datetime }}</td>
+          <td>{{ a.services or '-' }}</td>
+          <td>{{ a.notes or '-' }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="text-muted">No appointments found for this customer.</p>
+  {% endif %}
+{% else %}
+  <div class="alert alert-warning">Customer not found.</div>
+{% endif %}
+{% endblock %}

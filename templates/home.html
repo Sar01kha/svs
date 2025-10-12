@@ -1,16 +1,70 @@
 {% extends "base.html" %}
-
 {% block title %}Home - SVS{% endblock %}
 
 {% block content %}
+<!-- Hero: veterinary image (left) + intro text (right), no buttons -->
+<section class="py-4">
+  <div class="row align-items-center g-4">
+    <!-- Image LEFT on md+ screens -->
+    <div class="col-md-6">
+      <img
+        src="{{ url_for('static', filename='home.jpg') }}"
+       
+        class="img-fluid rounded shadow-sm"
+        alt="Veterinarian caring for a dog at the clinic">
+    </div>
 
-<h2>Home </h2>
+    <!-- Text RIGHT on md+ screens -->
+    <div class="col-md-6">
+      <h1 class="h2 mb-3">Compassionate, expert care for your pets.</h1>
+      <p class="lead mb-3">
+        At <strong>Selwyn Veterinary Services (SVS)</strong>, we provide wellness checks,
+        vaccinations, diagnostics, surgery, and friendly advice for every life stage.
+        Book an appointment or explore our services to get started.
+      </p>
+      <ul class="mb-0">
+        <li>Preventative care &amp; vaccinations</li>
+        <li>Dental, surgical, and emergency support</li>
+        <li>Diagnostics: X-ray, lab testing, and more</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
+<hr class="my-4">
 
-<p class="text-success"><strong>If you can see this in PythonAnywhere, your app is loading correctly. </strong> </p>
-
-
-<p>Add some brief text and an image here </p>
-
-
+<!-- (Optional) Upcoming appointments section below -->
+{% if upcoming is defined %}
+<section>
+  <h3 class="mb-3">Upcoming Appointments</h3>
+  {% if upcoming %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Date &amp; Time</th>
+          <th>Customer</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for a in upcoming %}
+        <tr>
+          <td>{{ a.appt_id }}</td>
+          <td>{{ a.appt_datetime }}</td>
+          <td>
+            <a href="{{ url_for('customer_appointment', customer_id=a.customer_id) }}">
+              {{ a.family_name }}, {{ a.first_name }}
+            </a>
+          </td>
+          <td>{{ a.notes or '-' }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="text-muted">No upcoming appointments to show.</p>
+  {% endif %}
+</section>
+{% endif %}
 {% endblock %}
