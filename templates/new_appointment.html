@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %}New Appointment - SVS{% endblock %}
+
+{% block content %}
+<h2>New Appointment</h2>
+<p class="text-muted">Choose a future date &amp; time (Sundays are not allowed), select a customer, and one or more services.</p>
+
+<form method="post" class="needs-validation" novalidate>
+  <div class="row g-3">
+
+    <!-- Customer -->
+    <div class="col-md-6">
+      <label for="customer_id" class="form-label">Customer</label>
+      <select id="customer_id" name="customer_id" class="form-select" required>
+        <option value="">-- Select customer --</option>
+        {% for c in customers %}
+          {% set sel = 'selected' if form_data and form_data.customer_id|string == c.customer_id|string else '' %}
+          <option value="{{ c.customer_id }}" {{ sel }}>
+            {{ c.family_name }}, {{ c.first_name }} (ID: {{ c.customer_id }})
+          </option>
+        {% endfor %}
+      </select>
+      <div class="invalid-feedback">Please select a customer.</div>
+    </div>
+
+    <!-- Date & Time -->
+    <div class="col-md-6">
+      <label for="appt_datetime" class="form-label">Date &amp; Time</label>
+      <input type="datetime-local"
+             id="appt_datetime"
+             name="appt_datetime"
+             class="form-control"
+             value="{{ form_data.appt_datetime if form_data else '' }}"
+             required>
+      <div class="form-text">Must be in the future and not on a Sunday.</div>
+      <div class="invalid-feedback">Please choose a valid future date &amp; time (not Sunday).</div>
+    </div>
+
+    <!-- Services -->
+    <div class="col-12">
+      <label class="form-label">Services</label>
+      <div class="row">
+        {% for s in services %}
+          {% set checked = 'checked' if form_data and (s.service_id|string in (form_data.service_ids or [])) else '' %}
+          <div class="col-md-6 col-lg-4">
+            <div class="form-check">
+              <input class="form-check-input"
+                     type="checkbox"
+                     id="svc_{{ s.service_id }}"
+                     name="service_ids"
+                     value="{{ s.service_id }}"
+                     {{ checked }}>
+              <label class="form-check-label" for="svc_{{ s.service_id }}">
+                {{ s.service_name }} — ${{ "%.2f"|format(s.price) }}
+              </label>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="form-text">Select at least one service.</div>
+    </div>
+
+    <!-- Notes (optional) -->
+    <div class="col-12">
+      <label for="notes" class="form-label">Notes (optional)</label>
+      <textarea id="notes" name="notes" class="form-control" rows="3">{{ form_data.notes if form_data else '' }}</textarea>
+    </div>
+
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Create Appointment</button>
+      <a href="{{ url_for('appointment_list') }}" class="btn btn-outline-secondary">Cancel</a>
+    </div>
+  </div>
+</form>
+
+<!-- Optional: client-side Sunday warning (server validation still authoritative) -->
+<script>
+  (function() {
+    const input = document.getElementById('appt_datetime');
+    if (!input) return;
+    input.addEventListener('change', function() {
+      const v = this.value;
+      if (!v) return;
+      const d = new Date(v.replace('T',' ') + ':00');
+      const isSunday = d.getDay() === 0; // Sunday=0 in JS
+      if (isSunday) {
+        alert('Appointments cannot be on a Sunday. Please choose another date.');
+        this.value = '';
+        this.focus();
+      }
+    });
+  })();
+</script>
+{% endblock %}

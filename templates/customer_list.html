@@ -2,7 +2,10 @@
 {% block title %}Customers - SVS{% endblock %}
 
 {% block content %}
-<h2>Customers</h2>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2 class="m-0">Customers</h2>
+  <a class="btn btn-sm btn-success" href="{{ url_for('new_customer') }}">+ Add Customer</a>
+</div>
 
 <form method="get" action="{{ url_for('customer_list') }}" class="mb-3">
   <div class="input-group" style="max-width:480px;">
@@ -40,7 +43,8 @@
         {% if c.email %}<div>{{ c.email }}</div>{% endif %}
         <div>{{ c.phone }}</div>
       </td>
-      <td>{{ c.date_joined.strftime('%d/%m/%Y') }}</td>
+      <!-- If you formatted date in SQL/route, use c.date_joined_fmt; otherwise keep c.date_joined -->
+      <td>{{ c.date_joined_fmt if c.date_joined_fmt is defined else c.date_joined }}</td>
       <td>
         <a class="btn btn-sm btn-outline-primary"
            href="{{ url_for('customer_appointment', customer_id=c.customer_id) }}">

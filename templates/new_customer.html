@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}New Customer - SVS{% endblock %}
+
+{% block content %}
+<h2>Add Customer</h2>
+<p class="text-muted">Email is optional. Date joined defaults to today and must not be in the future.</p>
+
+<form method="post" class="needs-validation" novalidate>
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label for="first_name" class="form-label">First Name</label>
+      <input type="text" id="first_name" name="first_name" class="form-control"
+             value="{{ form_data.first_name if form_data else '' }}" required>
+      <div class="invalid-feedback">First name is required.</div>
+    </div>
+
+    <div class="col-md-6">
+      <label for="family_name" class="form-label">Family Name</label>
+      <input type="text" id="family_name" name="family_name" class="form-control"
+             value="{{ form_data.family_name if form_data else '' }}" required>
+      <div class="invalid-feedback">Family name is required.</div>
+    </div>
+
+    <div class="col-md-6">
+      <label for="email" class="form-label">Email (optional)</label>
+      <input type="email" id="email" name="email" class="form-control"
+             value="{{ form_data.email if form_data else '' }}" placeholder="name@example.com">
+      <div class="form-text">Leave blank if the customer has no email.</div>
+    </div>
+
+    <div class="col-md-6">
+      <label for="phone" class="form-label">Phone (optional)</label>
+      <input type="text" id="phone" name="phone" class="form-control"
+             value="{{ form_data.phone if form_data else '' }}" placeholder="e.g., 021 123 4567">
+    </div>
+
+    <div class="col-md-6">
+      <label for="date_joined" class="form-label">Date Joined</label>
+      <input type="date" id="date_joined" name="date_joined" class="form-control"
+             value="{{ (form_data.date_joined if form_data else today_str) }}"
+             max="{{ today_str }}" required>
+      <div class="form-text">Defaults to today; cannot be in the future.</div>
+      <div class="invalid-feedback">Please choose a valid date (today or earlier).</div>
+    </div>
+
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Add Customer</button>
+      <a href="{{ url_for('customer_list') }}" class="btn btn-outline-secondary">Cancel</a>
+    </div>
+  </div>
+</form>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Customer Appointment - SVS{% endblock %}
+
+{% block content %}
+<a class="btn btn-link p-0 mb-3" href="{{ url_for('customer_list') }}">&larr; Back to customers</a>
+
+{% if customer %}
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <h2 class="m-0">{{ customer.family_name }}, {{ customer.first_name }}</h2>
+    <a class="btn btn-sm btn-outline-primary"
+       href="{{ url_for('edit_customer', customer_id=customer.customer_id) }}">Edit</a>
+  </div>
+
+  <p class="mb-4">
+    {% if customer.email %}<strong>Email:</strong> {{ customer.email }}<br>{% endif %}
+    <strong>Phone:</strong> {{ customer.phone or '—' }}<br>
+    <strong>Date joined:</strong> {{ customer.date_joined }}
+  </p>
+
+  <h4 class="mt-3">Appointments</h4>
+  <p class="small text-muted">Oldest first. Future appointments are highlighted.</p>
+
+  {% if appts %}
+    <table class="table table-striped align-middle">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Date &amp; Time</th>
+          <th>Services (with cost)</th>
+          <th class="text-end">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for a in appts %}
+        <tr class="{% if a.is_future %}table-success{% endif %}">
+          <td>{{ a.appt_id }}</td>
+          <td>{{ a.appt_datetime }}</td>
+          <td>{{ a.services_with_costs or '-' }}</td>
+          <td class="text-end">{{ "%.2f"|format(a.total_cost or 0) }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="text-muted">No appointments found for this customer.</p>
+  {% endif %}
+{% else %}
+  <div class="alert alert-warning">Customer not found.</div>
+{% endif %}
+{% endblock %}

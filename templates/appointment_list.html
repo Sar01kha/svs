@@ -20,7 +20,7 @@
     <!-- Different colour for future appointments -->
     <tr class="{% if a.is_future %}table-success{% endif %}">
       <td>{{ a.appt_id }}</td>
-      <td>{{ a.appt_datetime }}</td>
+      <td>{{ a.appt_datetime.strftime('%d/%m/%Y') }}</td>
       <td>
         <a href="{{ url_for('customer_appointment', customer_id=a.customer_id) }}">
           {{ a.family_name }}, {{ a.first_name }}
@@ -31,6 +31,11 @@
     </tr>
     {% endfor %}
   </tbody>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+  <h2 class="m-0">Appointments</h2>
+  <a class="btn btn-sm btn-success" href="{{ url_for('new_appointment') }}">+ New Appointment</a>
+</div>
+
 </table>
 
 {% if not appts %}
