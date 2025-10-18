@@ -1,32 +1,30 @@
 {% extends "base.html" %}
 {% block title %}Customers - SVS{% endblock %}
-
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h2 class="m-0">Customers</h2>
-  <a class="btn btn-sm btn-success" href="{{ url_for('new_customer') }}">+ Add Customer</a>
-</div>
+<h2 class="mb-3">Customers</h2>
 
-<form method="get" action="{{ url_for('customer_list') }}" class="mb-3">
-  <div class="input-group" style="max-width:480px;">
-    <input type="text" name="q" class="form-control" placeholder="Search name, email, or phone"
-           value="{{ q or '' }}">
+<form class="row g-2 mb-3" method="get" action="{{ url_for('customer_list') }}">
+  <div class="col-sm-6 col-md-4">
+    <input type="text" class="form-control" name="q" value="{{ q or '' }}" placeholder="Search name, email, or phone">
+  </div>
+  <div class="col-auto">
     <button class="btn btn-primary" type="submit">Search</button>
-    {% if q %}
-      <a class="btn btn-outline-secondary" href="{{ url_for('customer_list') }}">Reset</a>
-    {% endif %}
+    <a class="btn btn-outline-secondary" href="{{ url_for('customer_list') }}">Reset</a>
+  </div>
+  <div class="col-auto ms-auto">
+    <a class="btn btn-success" href="{{ url_for('new_customer') }}">+ New Customer</a>
   </div>
 </form>
 
-<table class="table table-striped">
+{% if customers %}
+<table class="table table-striped align-middle">
   <thead>
     <tr>
       <th>ID</th>
-      <th>Family name</th>
-      <th>First name</th>
-      <th>Contact</th>
-      <th>Date joined</th>
-      <th></th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Date Joined</th>
     </tr>
   </thead>
   <tbody>
@@ -35,24 +33,17 @@
       <td>{{ c.customer_id }}</td>
       <td>
         <a href="{{ url_for('customer_appointment', customer_id=c.customer_id) }}">
-          {{ c.family_name }}
+          {{ c.family_name }}, {{ c.first_name }}
         </a>
       </td>
-      <td>{{ c.first_name }}</td>
-      <td>
-        {% if c.email %}<div>{{ c.email }}</div>{% endif %}
-        <div>{{ c.phone }}</div>
-      </td>
-      <!-- If you formatted date in SQL/route, use c.date_joined_fmt; otherwise keep c.date_joined -->
-      <td>{{ c.date_joined_fmt if c.date_joined_fmt is defined else c.date_joined }}</td>
-      <td>
-        <a class="btn btn-sm btn-outline-primary"
-           href="{{ url_for('customer_appointment', customer_id=c.customer_id) }}">
-           View appointments
-        </a>
-      </td>
+      <td>{{ c.email or '—' }}</td>
+      <td>{{ c.phone or '—' }}</td>
+      <td>{{ c.date_joined.strftime('%d/%m/%Y') }}</td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
+{% else %}
+<p class="text-muted">No customers found.</p>
+{% endif %}
 {% endblock %}

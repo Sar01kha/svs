@@ -1,71 +1,190 @@
 {% extends "base.html" %}
 {% block title %}Home - SVS{% endblock %}
-
 {% block content %}
-<!-- Hero: veterinary image (left) + intro text (right), no buttons -->
-<section class="py-4">
+
+<!-- HERO: big promise + phone CTA (JRVS-inspired) -->
+<section class="py-5 bg-warning-subtle border rounded">
   <div class="row align-items-center g-4">
-    <!-- Image LEFT on md+ screens -->
-    <div class="col-md-6">
-      <img
-        src="{{ url_for('static', filename='home.jpg') }}"
-       
-        class="img-fluid rounded shadow-sm"
-        alt="Veterinarian caring for a dog at the clinic">
+    <div class="col-lg-6">
+      <h1 class="display-6 mb-3">Expert veterinary surgery — compassionate care.</h1>
+      <p class="lead mb-4">
+        Our team performs orthopedic and soft-tissue procedures in a modern, fully equipped facility — focused on your pet’s safety and recovery.
+      </p>
+      <div class="d-flex flex-wrap gap-2">
+        <a class="btn btn-warning" href="{{ url_for('new_appointment') }}">Book Appointment</a>
+        <a class="btn btn-outline-dark" href="tel:035550123">Call (03) 555 0123</a>
+        <a class="btn btn-outline-dark" href="{{ url_for('service_list') }}">Surgery &amp; Services</a>
+      </div>
     </div>
 
-    <!-- Text RIGHT on md+ screens -->
-    <div class="col-md-6">
-      <h1 class="h2 mb-3">Compassionate, expert care for your pets.</h1>
-      <p class="lead mb-3">
-        At <strong>Selwyn Veterinary Services (SVS)</strong>, we provide wellness checks,
-        vaccinations, diagnostics, surgery, and friendly advice for every life stage.
-        Book an appointment or explore our services to get started.
-      </p>
-      <ul class="mb-0">
-        <li>Preventative care &amp; vaccinations</li>
-        <li>Dental, surgical, and emergency support</li>
-        <li>Diagnostics: X-ray, lab testing, and more</li>
-      </ul>
+    <!-- HERO IMAGE CAROUSEL (auto-slide every 5s; pause on hover) -->
+    <div class="col-lg-6">
+      <div id="heroCarousel"
+           class="carousel slide border rounded bg-warning-subtle"
+           data-bs-ride="carousel"
+           data-bs-interval="5000"
+           data-bs-pause="hover">
+        <!-- dots -->
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        </div>
+
+        <!-- slides -->
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{{ url_for('static', filename='home.jpg') }}" class="d-block w-100 rounded" alt="SVS clinic welcome image">
+          </div>
+          <div class="carousel-item">
+            <img src="{{ url_for('static', filename='doctor.jpg') }}" class="d-block w-100 rounded" alt="SVS veterinarian with patient">
+          </div>
+        </div>
+
+        <!-- controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev" aria-label="Previous">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next" aria-label="Next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+      </div>
     </div>
   </div>
 </section>
 
-<hr class="my-4">
+<hr class="my-5">
 
-<!-- (Optional) Upcoming appointments section below -->
+<!-- LOCATIONS -->
+<section class="mb-5">
+  <div class="row g-3">
+    <div class="col-xl-4">
+      <div class="card h-100 border-warning">
+        <div class="card-body">
+          <h5 class="card-title">Main Clinic</h5>
+          <p class="mb-1">123 Lincoln Road</p>
+          <p class="mb-1">Lincoln 7608</p>
+          <p class="mb-3">Open: Mon–Fri 9:00–18:00 • Sat 9:00–13:00</p>
+          <a class="btn btn-outline-dark btn-sm" href="tel:035550123">Call (03) 555 0123</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4">
+      <div class="card h-100 border-warning">
+        <div class="card-body">
+          <h5 class="card-title">After-Hours / Emergencies</h5>
+          <p class="mb-1">Partner Specialty Centre</p>
+          <p class="mb-1">Christchurch</p>
+          <p class="mb-3">24/7 urgent care coordination</p>
+          <a class="btn btn-outline-dark btn-sm" href="tel:0226351098">Call 022 635 1098</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-4">
+      <div class="card h-100 border-warning">
+        <div class="card-body">
+          <h5 class="card-title">Satellite Clinic</h5>
+          <p class="mb-1">Selwyn District (pop-up days)</p>
+          <p class="mb-3">Check dates and availability</p>
+          <a class="btn btn-outline-dark btn-sm" href="{{ url_for('new_appointment') }}">Check availability</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SURGERY TYPES / SERVICES -->
+<section class="mb-5">
+  <h2 class="h4 mb-3">Surgery &amp; Services</h2>
+  <div class="row g-3">
+    <div class="col-md-4">
+      <div class="card h-100 border-warning">
+        <div class="card-body">
+          <h5 class="card-title mb-2">Orthopedic Surgery</h5>
+          <p class="card-text mb-3">Cruciate repair, fracture management, patella luxation, and more.</p>
+          <a class="btn btn-outline-dark btn-sm" href="{{ url_for('service_list') }}">Learn more</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100 border-warning">
+        <div class="card-body">
+          <h5 class="card-title mb-2">Soft-Tissue Surgery</h5>
+          <p class="card-text mb-3">Mass removals, gastrointestinal, urogenital, airway, and reconstructive procedures.</p>
+          <a class="btn btn-outline-dark btn-sm" href="{{ url_for('service_list') }}">Learn more</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card h-100 border-warning">
+        <div class="card-body">
+          <h5 class="card-title mb-2">Consults &amp; Imaging</h5>
+          <p class="card-text mb-3">Consultation rooms, radiology, and referral coordination with specialty groups.</p>
+          <a class="btn btn-outline-dark btn-sm" href="{{ url_for('service_list') }}">Learn more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PET OWNERS / REFERRALS -->
+<section class="mb-5">
+  <div class="row g-3">
+    <div class="col-lg-6">
+      <div class="card h-100 border-warning">
+        <div class="card-body">
+          <h5 class="card-title">For Pet Owners</h5>
+          <p class="mb-3">What to expect on surgery day, pre-op fasting, home recovery tips, and payment options.</p>
+          <div class="d-flex gap-2">
+            <a class="btn btn-warning btn-sm" href="{{ url_for('new_appointment') }}">Book now</a>
+            <a class="btn btn-outline-dark btn-sm" href="#">Download forms</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card h-100 border-warning">
+        <div class="card-body">
+          <h5 class="card-title">For Referral Veterinarians</h5>
+          <p class="mb-3">We collaborate with clinics across Canterbury to deliver seamless surgical care.</p>
+          <div class="d-flex gap-2">
+            <a class="btn btn-outline-dark btn-sm" href="#">Referral form</a>
+            <a class="btn btn-outline-dark btn-sm" href="mailto:welcome@svs.nz">Email us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPTIONAL: Upcoming appointments (NZ date format) -->
 {% if upcoming is defined %}
-<section>
-  <h3 class="mb-3">Upcoming Appointments</h3>
+<section class="mb-2">
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <h5 class="m-0">Upcoming Appointments</h5>
+    <a class="btn btn-outline-dark btn-sm" href="{{ url_for('appointment_list') }}">View all</a>
+  </div>
   {% if upcoming %}
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Date &amp; Time</th>
-          <th>Customer</th>
-          <th>Notes</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for a in upcoming %}
-        <tr>
-          <td>{{ a.appt_id }}</td>
-          <td>{{ a.appt_datetime }}</td>
-          <td>
-            <a href="{{ url_for('customer_appointment', customer_id=a.customer_id) }}">
-              {{ a.family_name }}, {{ a.first_name }}
-            </a>
-          </td>
-          <td>{{ a.notes or '-' }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table table-sm table-striped align-middle">
+        <thead>
+          <tr><th>ID</th><th>Date &amp; Time</th><th>Customer</th><th>Notes</th></tr>
+        </thead>
+        <tbody>
+          {% for a in upcoming %}
+          <tr>
+            <td>{{ a.appt_id }}</td>
+            <td>{{ a.appt_datetime.strftime('%d/%m/%Y %H:%M') }}</td>
+            <td><a href="{{ url_for('customer_appointment', customer_id=a.customer_id) }}">{{ a.family_name }}, {{ a.first_name }}</a></td>
+            <td>{{ a.notes or '-' }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   {% else %}
-    <p class="text-muted">No upcoming appointments to show.</p>
-    
+    <p class="text-muted mb-0">No upcoming appointments to show.</p>
   {% endif %}
 </section>
 {% endif %}
+
 {% endblock %}

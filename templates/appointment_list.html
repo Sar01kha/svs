@@ -1,26 +1,28 @@
 {% extends "base.html" %}
 {% block title %}Appointments - SVS{% endblock %}
-
 {% block content %}
-<h2>Appointments</h2>
-<p class="small text-muted">Oldest first. Future appointments are highlighted.</p>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2 class="m-0">Appointments</h2>
+  <a class="btn btn-success" href="{{ url_for('new_appointment') }}">+ New Appointment</a>
+</div>
 
+
+<div class="table-responsive">
 <table class="table table-striped align-middle">
   <thead>
     <tr>
       <th>ID</th>
       <th>Date &amp; Time</th>
       <th>Customer</th>
-      <th>Services (with cost)</th>
-      <th class="text-end">Total</th>
+      <th>Services</th>
+      <th class="text-end">Total ($)</th>
     </tr>
   </thead>
   <tbody>
     {% for a in appts %}
-    <!-- Different colour for future appointments -->
     <tr class="{% if a.is_future %}table-success{% endif %}">
       <td>{{ a.appt_id }}</td>
-      <td>{{ a.appt_datetime.strftime('%d/%m/%Y') }}</td>
+      <td>{{ a.appt_datetime.strftime('%d/%m/%Y %H:%M') }}</td>
       <td>
         <a href="{{ url_for('customer_appointment', customer_id=a.customer_id) }}">
           {{ a.family_name }}, {{ a.first_name }}
@@ -31,14 +33,6 @@
     </tr>
     {% endfor %}
   </tbody>
-  <div class="d-flex justify-content-between align-items-center mb-3">
-  <h2 class="m-0">Appointments</h2>
-  <a class="btn btn-sm btn-success" href="{{ url_for('new_appointment') }}">+ New Appointment</a>
-</div>
-
 </table>
-
-{% if not appts %}
-  <p class="text-muted">No appointments found.</p>
-{% endif %}
+</div>
 {% endblock %}
