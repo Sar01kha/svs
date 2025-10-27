@@ -228,13 +228,13 @@ def new_appointment():
     services = cursor.fetchall()
 
     if request.method == "POST":
-        # --- Read form inputs ---
+        #Read form inputs
         customer_id = request.form.get("customer_id")
         dt_str      = (request.form.get("appt_datetime") or "").strip()  # "YYYY-MM-DDTHH:MM"
         notes       = (request.form.get("notes") or "").strip() or None
         service_ids = request.form.getlist("service_ids")  # list of strings
 
-        # --- Validate ---
+        #Validate
         errors = []
 
         if not customer_id:
@@ -297,7 +297,7 @@ def new_appointment():
     cursor.close()
     return render_template("new_appointment.html", customers=customers, services=services)
 
-# --------------------------- Edit Customer ---------------------------
+#Edit Customer
 
 @app.route("/customers/<int:customer_id>/edit", methods=["GET", "POST"])
 def edit_customer(customer_id):

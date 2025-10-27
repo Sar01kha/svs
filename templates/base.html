@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title>{% block title %}SVS{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Bootstrap -->
+    <!--Bootstrap--> 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   </head>
 
@@ -12,40 +12,47 @@
     <!-- Single Navbar -->
     <header class="border-bottom">
     <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-secondary">
+<nav class="navbar navbar-expand-lg navbar-light bg-warning">
   <div class="container">
-    <a class="navbar-brand fw-semibold" href="{{ url_for('home') }}">SVS</a>
+    <!-- Left: Navigation links -->
+    <div class="collapse navbar-collapse justify-content-start" id="svsMainNav">
+      <ul class="navbar-nav mb-2 mb-lg-0 fw-bold">
+        <li class="nav-item">
+          <a class="nav-link {{ 'active' if request.endpoint == 'home' else '' }}"
+             href="{{ url_for('home') }}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{ 'active' if request.endpoint == 'service_list' else '' }}"
+             href="{{ url_for('service_list') }}">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{ 'active' if request.endpoint == 'customer_list' else '' }}"
+             href="{{ url_for('customer_list') }}">Customers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{ 'active' if request.endpoint == 'appointment_list' else '' }}"
+             href="{{ url_for('appointment_list') }}">Appointments</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{ 'active' if request.endpoint == 'service_summary_report' else '' }}"
+             href="{{ url_for('service_summary_report') }}">Report</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Right: Brand -->
+    <a class="navbar-brand fw-bold ms-auto" href="{{ url_for('home') }}">Selwyn Veterinary Services</a>
+
+    <!-- Mobile toggle -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#svsMainNav" aria-controls="svsMainNav"
             aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
-    <div class="collapse navbar-collapse" id="svsMainNav">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link fw-bold {{ 'active' if request.endpoint == 'home' else '' }}"
-             href="{{ url_for('home') }}">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link fw-bold {{ 'active' if request.endpoint == 'service_list' else '' }}"
-             href="{{ url_for('service_list') }}">Services</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link fw-bold{{ 'active' if request.endpoint == 'customer_list' else '' }}"
-             href="{{ url_for('customer_list') }}">Customers</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link fw-bold {{ 'active' if request.endpoint == 'appointment_list' else '' }}"
-             href="{{ url_for('appointment_list') }}">Appointments</a>
-        </li>
-      </ul>
-    </div>
-  </div>
+  </div>
 </nav>
-    </header>
-    
 
+    </header>
     <!-- Page Content -->
     <main class="flex-grow-1">
       <div class="container my-4">
@@ -72,8 +79,7 @@
     </main>
 
     <!-- Footer -->
-    <!-- Footer -->
-<footer class="bg-danger-subtle border-top">
+<footer class="bg-warning border-top">
   <div class="container py-4">
     <div class="row g-4">
       <div class="col-md">
