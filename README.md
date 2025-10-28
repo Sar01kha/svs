@@ -11,12 +11,15 @@ Only Flask, MySQL, and Bootstrap 5 (JavaScript)are used to make the appointments
 1. **create virtual environment:**
 *view*>*command palette* > *python create environment* > *venv*
 
+<<<<<<< HEAD
 ## Steps 
 
 **Create Virtual Environment:** 
 
 *view > command palette > python create environment > venv > created virtual envrionment*
 
+=======
+>>>>>>> 6783956f3b6f5ede71b071212fac198923526901
 2.  **Install dependencies** 
 pip install --upgrade pip
 pip install requirements.txt.
