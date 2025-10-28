@@ -9,78 +9,71 @@ Only Flask, MySQL, and Bootstrap 5 (JavaScript)are used to make the appointments
 
 ## Steps to read this in VS code
 
-#create virtual environment 
-view>command palette > python create environment > venv > created virtual envrionment
-bash
+1. **create virtual environment:**
+*view>command palette > python create environment > venv *
+
 python -m venv .venv
-Activate: - Windows PowerShell> bash .venv\Scripts/Activate.ps1 -
-MacOS / Linuxbash source.venv/bin/activate
 
-
-#Install dependencies 
-bash
+  
+2.  **Install dependencies** 
 pip install --upgrade pip
 pip install requirements.txt.
 
 
-#Configure database in mysql
+3. **Configure database in mysql**
 The query to be run in your MySQL console is the following:
 sql
-SOURCE svs_create_local_db.sql;
+SOURCE `svs_create_local_db.sql` ;
 USE svs;
-SOURCE svs_populate_data.sql;
+SOURCE `svs_populate_data.sql`;
 This establishes all the tables (customers, services, appointments, etc.).
 Loads sample data and uses it to create a utility named appointment services.
+- open file from workbench 
+- Once query was run, press Refresh arrows on the top right of Schemas sidebar to appear in the list.
 
 
-#Environment variables 
+4. **Environment variables:**
 The following should be run beforehand:
 bash
-export DB_HOST=127.0.0.1
-export DB_PORT=3306
-export DB_USER=root
-export DB_PASSWORD=yourpassword
-export DB_NAME=svs
+export DB_HOST=`127.0.0.1`
+export DB_PORT=`3306`
+export DB_USER=`root`
+export DB_PASSWORD=`yourpassword`
+export DB_NAME=`svs`
 
 Otherwise, declare them in connect.py.
 
-#How to run the application
- bash
-python app.py
-
-or
-
- bash
-flask run
+5. **Run the application**
+To run with debugging:  **Run** > **Start Debugging** > **Python Debugger** > **Flask** (<u>NOT</u> *Python file*!) > **app.py**  
 
 Then open:http://127.0.0.1:5000
 
 
-#Web application features 
+## Web application features 
 
-1.Home page with picture and description.
-2.Header and footer (Bootstrap-based) of every page.
-3.Customer List and Search (Clickable to see appointments).
-4.Appointment List (the past and the future, color-coded)
-5.Adding and editing of customers with validation.
-6.Add Appointments (never on Sundays, only in future)
-7.Service Summary Report (totals and earnings)
+1. Home page with picture and description.
+2. Header and footer (Bootstrap-based) of every page.
+3. Customer List and Search (Clickable to see appointments).
+4. Appointment List (the past and the future, color-coded)
+5. Adding and editing of customers with validation.
+6. Add Appointments (never on Sundays, only in future)
+7. Service Summary Report (totals and earnings)
 
 
-#UI designs used 
+### UI designs used 
 
--Pure "Bootstrap 5".
--Flexible design (no custom CSS).
--User-friendly and business-like design.
+- Pure "Bootstrap 5".
+- Flexible design (no custom CSS).
+- User-friendly and business-like design.
 
 Example Bootstrap import:
 html
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 
-Project Report Requirements ;
+# Project Report Requirements ;
 
-#Design Decisions 
+## Design Decisions 
 1.  The reason why Flask Blueprints was not chosen was to keep things simple (single app).
     file.
 2.  Roads divided logically:services,customers, appointments and report.
@@ -101,15 +94,15 @@ Project Report Requirements ;
 
 
 
-#Image source
+## Image source
 
 Pexels - ( https://www.pexels.com/photo/two-yellow-labrador-retriever-puppies-1108099/).
 All the pictures are open access and can be used in the learning process.
 
 
-#Database questions
+## Database questions
 
-1.Table Creation (customers)  
+1. **Table Creation (customers)**  
  sql
 CREATE TABLE customers (
   customer id int auto increase primary key,
@@ -121,7 +114,7 @@ CREATE TABLE customers (
 );
 
 
-2.Table Relationships  
+2. **Table Relationships**  
 
  sql
 CREATE Table appointment services (
@@ -133,7 +126,7 @@ CREATE Table appointment services (
 );
 
 
-3.New Table - animals  
+3. **New Table - animals**  
  sql
 CREATE TABLE animals (
   animal_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -146,13 +139,13 @@ CREATE TABLE animals (
 );
 
 
- Insert Example
+ `Insert Example`
  sql
 INSERT animals (owner id, name, species, sex, date of birth);
 VALUES (1, 'Buddy', 'Dog', 'Male', '2021-05-10');
 
 
-5. Discussion 
+5. **Discussion** 
 Ideally, the appointments are to be connected to an animal, not.
 only the owner, as there are pets to which the services are applicable. This improves
 record accuracy and enables more than one animal to a customer. However, for
@@ -161,7 +154,7 @@ to simplify the model and combine requirement.
 
 
 
-The PythonAnywhere deployment is also available.
+#### The PythonAnywhere deployment is also available.
 
 -   GitHub Cloning Repository (Not uploaded manually).
 -   Web interface recreated the database.
