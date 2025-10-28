@@ -32,7 +32,7 @@
       </thead>
       <tbody>
         {% for a in appts %}
-        <tr class="{% if a.is_future %}table-success{% endif %}">
+        <tr class="{% if a.is_future %}table-warning-subtle{% endif %}">
           <td>{{ a.appt_id }}</td>
           <td>{{ a.appt_datetime }}</td>
           <td>{{ a.services_with_costs or '-' }}</td>

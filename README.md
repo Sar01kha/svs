@@ -1,161 +1,127 @@
-Selwyn Veterinary Services (SVS) is a veterinary clinic located in Vermont, USA.
+# Selwyn Veterinary Services (SVS) 
 
-Web Application Evaluation Flashcard (Flask + MySQL Project) COMP636.
+Selwyn veterinary services (SVS) is a small veterinary clinic in 123 Lincoln Road, Lincoln 7608, New zealand.
 
-Selwyn veterinary services (SVS) is a small veterinary clinic in.
-Harbleton, Pewsey.\
-This web application will enable employees to handle clients, services, and
-Only Flask, MySQL, and Bootstrap 5 are used to make the appointments.
-JavaScript).
+This web application will enable employees to handle customers, services, and appointments.
 
-------------------------------------------------------------------------
+Only Flask, MySQL, and Bootstrap 5 (JavaScript)are used to make the appointments.
 
-## 🚀 Quick Setup Guide
 
-### ⿡ Create Virtual Environment
+#steps 
 
- bash
+#create virtual environment 
+view>command palette > python create environment > venv > created virtual envrionment
+bash
 python -m venv .venv
+Activate: - Windows PowerShell> bash .venv\Scripts/Activate.ps1 -
+MacOS / Linuxbash source.venv/bin/activate
 
 
-Activate: - **Windows PowerShell> bash .venv\Scripts/Activate.ps1 -
-*MacOS / Linux*bash source.venv/bin/activate
-
-### ⿢ Install Dependencies
-
- bash
+#Install dependencies 
+bash
 pip install --upgrade pip
 pip install requirements.txt.
 
 
-### ⿣ Configure Database (MySQL)
-
+#Configure database in mysql
 The query to be run in your MySQL console is the following:
-
- sql
+sql
 SOURCE svs_create_local_db.sql;
 USE svs;
 SOURCE svs_populate_data.sql;
-
-
-This establishes all the tables (`customers, services, appointments, etc.).
+This establishes all the tables (customers, services, appointments, etc.).
 Loads sample data and uses it to create a utility named appointment services.
 
-------------------------------------------------------------------------
 
-## ⚙ Environment Variables
-
+#Environment variables 
 The following should be run beforehand:
-
- bash
+bash
 export DB_HOST=127.0.0.1
 export DB_PORT=3306
 export DB_USER=root
 export DB_PASSWORD=yourpassword
 export DB_NAME=svs
 
-
 Otherwise, declare them in connect.py.
 
-------------------------------------------------------------------------
-
-## ▶ Run the Application
-
+#How to run the application
  bash
 python app.py
-
 
 or
 
  bash
 flask run
 
+Then open:http://127.0.0.1:5000
 
-Then open:\
-👉 <http://127.0.0.1:5000>
 
-------------------------------------------------------------------------
+#Web application features 
 
-## 🧰 Features Implemented
+1.Home page with picture and description.
+2.Header and footer (Bootstrap-based) of every page.
+3.Customer List and Search (Clickable to see appointments).
+4.Appointment List (the past and the future, color-coded)
+5.Adding and editing of customers with validation.
+6.Add Appointments (never on Sundays, only in future)
+7.Service Summary Report (totals and earnings)
 
--   home page with picture and description.
--  Header and footer (Bootstrap-based) of every page.
--   Customer List and Search (Clickable to see appointments).
--   Appointment List (the past and the future, color-coded)
--   Adding and editing of customers with validation.
--   Add Appointments (never on Sundays, only in future)
--   Service Summary Report (totals and earnings)
 
-------------------------------------------------------------------------
+#UI designs used 
 
-## 🎨 UI Design Notes
+-Pure "Bootstrap 5".
+-Flexible design (no custom CSS).
+-User-friendly and business-like design.
 
--   Pure *Bootstrap 5* via CDN.\
--   Flexible design (no custom CSS).
--   User-friendly and business-like design.
--   Example Bootstrap import:
-
- html
+Example Bootstrap import:
+html
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 
-------------------------------------------------------------------------
+Project Report Requirements ;
 
-Project Report (COMP636 Requirement)
-
-## 🧩 Design Decisions
-
+#Design Decisions 
 1.  The reason why Flask Blueprints was not chosen was to keep things simple (single app).
-    file).
-2.  Roads divided logically:/services,/customers,/ appointments etc.
+    file.
+2.  Roads divided logically:services,customers, appointments and report.
 3.  "GET and POST methods" are used in form processing, GET is used to list.
-    POST for insert/update.
-4.  All other templates were based on the extension of Single base.html template.
+     POST for insert/update.
+4.  All other templates were based on the extension of Single base.html template. 
     navigable and footer that is consistent.
 5.  Bootstrap Forms were utilized to guarantee intrinsic validation designs.
 6.  MySQL dictionaries and cursors are used to access data through easy field access.
-    names.
-7.  Customer clickable link loads the appointment summary dynamically.
-    using query parameters.
-8.  DB operations were wrapped in try-except to add error handling.
-9.  Check future validation of appointments current Danny using
-    Python.
-10. Reuse of template: customer list layout (search) layout.
-    results.
-11. Database connection stored in central database, that is, connect.py, in order to make it easy.
-    environment changes.\
-12. Professional layout was ensured by the use of Bootstrap containers and.
-    cards.\
-13. GROUP BY, COUNT and SUM queries can be used in querying the service summary.
+7.  Customer clickable link loads the appointment summary dynamically using query parameters.
+8.  Check future validation of appointments by Date & time and color  using Python and bootstrap.
+9. same layout for service list and customer list to make it similar.
+10. Database connection stored in central database, that is, connect.py, in order to make it easy.
+11. Professional layout was ensured by the use of Bootstrap containers and.
+    cards.
+12. GROUP BY, COUNT and SUM queries can be used in querying the service summary.
     efficiency.
 
-------------------------------------------------------------------------
 
-## 🖼 Image Sources
 
--   Unsplash - Veterinary Care (unsplash.com) (Photo).
-    (Free use)\
-- Pexels - Pet Clinic ( https://www.PeXels.com/search/veterinary).
-    All the pictures are open access and can be used in the learning process.
+#Image source
 
-------------------------------------------------------------------------
+Pexels - ( https://www.pexels.com/photo/two-yellow-labrador-retriever-puppies-1108099/).
+All the pictures are open access and can be used in the learning process.
 
-## 🗃 Database Questions
 
-*⿡ Table Creation (customers)*
+#Database questions
 
+1.Table Creation (customers)  
  sql
 CREATE TABLE customers (
   customer id int auto increase primary key,
   first_name VARCHAR(50),
-  last_name VARCHAR(50),
-  phone VARCHAR(20),
+  family_name VARCHAR(50),
   email VARCHAR(100),
+  phone VARCHAR(20),
   date_joined DATE
 );
 
 
-*⿢ Table Relationships*
+2.Table Relationships  
 
  sql
 CREATE Table appointment services (
@@ -167,31 +133,30 @@ CREATE Table appointment services (
 );
 
 
-*⿣ New Table -- animals*
-
+3.New Table - animals  
  sql
 CREATE TABLE animals (
-  animal id INT AUTO INCREMENT PRIMARY Key,
+  animal_id INT AUTO_INCREMENT PRIMARY KEY,
   owner_id INT,
   name VARCHAR(50),
   species VARCHAR(30),
   sex VARCHAR(10),
   date_of_birth DATE,
-  Foreign key(owner id) refers to customers(customer id).
+  FOREIGN KEY (owner_id) REFERENCES customers(customer_id)
 );
 
 
-*⿤ Insert Example*
-
+ Insert Example
  sql
 INSERT animals (owner id, name, species, sex, date of birth);
 VALUES (1, 'Buddy', 'Dog', 'Male', '2021-05-10');
 
 
-*5* Discussion Ideally, the appointments are to be connected to an animal, not.
+5. Discussion 
+Ideally, the appointments are to be connected to an animal, not.
 only the owner, as there are pets to which the services are applicable. This improves
 record accuracy and enables more than one animal to a customer. However, for
-the simplicity of this project, appointments are also bound to the *customer*
+the simplicity of this project, appointments are also bound to the customer
 to simplify the model and combine requirement.
 
 

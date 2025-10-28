@@ -3,18 +3,6 @@
 
 {% block content %}
 
-<!-- top info strip: phone + hours -->
-<section class="py-2 bg-warning-subtle border rounded">
-  <div class="container d-flex flex-wrap gap-3 justify-content-between align-items-center">
-    <div class="small">Compassionate care for pets in Selwyn & Lincoln.</div>
-    <div class="d-flex gap-2 small">
-      <span><strong>Hours:</strong> Mon–Fri 9–6, Sat 9–1</span>
-      <a href="tel:+64-3-555-0123" class="link-dark text-decoration-none"><strong>(03) 555 0123</strong></a>
-      <a href="{{ url_for('new_appointment') }}" class="btn btn-warning btn-sm">Book now</a>
-    </div>
-  </div>
-</section>
-
 <!-- hero -->
 <section class="py-4">
   <div class="row align-items-center g-4">
@@ -22,13 +10,12 @@
       <img
         src="{{ url_for('static', filename='home.jpg') }}"
         class="img-fluid rounded shadow-sm"
-        alt="Veterinarian caring for a dog at the clinic">
+        alt="cute dogs ">
     </div>
     <div class="col-md-6">
-      <h1 class="h2 mb-3">Kind, expert veterinary care.</h1>
-      <p class="lead mb-4">
-        At <strong>Selwyn Veterinary Services (SVS)</strong>, we provide wellness checks,
-        vaccinations, dental care, surgery, and practical advice for every life stage.
+      <h1 class="h2 mb-3">Gentle and Loving care,Happier pets.</h1>
+      <p class="card-title mb-3">
+        For every stage of life, <strong>Selwyn Veterinary Services (SVS)</strong> delivers wellness checkups, vaccines, dental care, surgery, and valuable advice.
       </p>
       <div class="d-flex flex-wrap gap-2">
         <a class="btn btn-warning" href="{{ url_for('service_list') }}">View services</a>
@@ -39,179 +26,6 @@
   </div>
 </section>
 
-<!-- why choose us -->
-<section class="my-4">
-  <h3 class="h4 mb-3">Why choose SVS</h3>
-  <div class="row g-3">
-    <div class="col-md-4">
-      <div class="card h-100 border-warning">
-        <div class="card-body">
-          <h5 class="card-title">Experienced team</h5>
-          <p class="card-text">Clear treatment plans and careful handling for low-stress visits.</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card h-100 border-warning">
-        <div class="card-body">
-          <h5 class="card-title">Everyday to surgical</h5>
-          <p class="card-text">From vaccinations and dental care to minor procedures (by appointment).</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card h-100 border-warning">
-        <div class="card-body">
-          <h5 class="card-title">Local & friendly</h5>
-          <p class="card-text">We’re part of the community—here when you need us.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- services spotlight -->
-<section class="my-4">
-  <h3 class="h4 mb-3">What we do</h3>
-  <div class="row g-3">
-    <div class="col-md-4">
-      <div class="card h-100">
-        <div class="card-body">
-          <h5 class="card-title">Consults & Preventative</h5>
-          <ul class="mb-3">
-            <li>Wellness checks</li>
-            <li>Vaccinations</li>
-            <li>Flea &amp; worm treatment</li>
-          </ul>
-          <a class="btn btn-outline-dark btn-sm" href="{{ url_for('service_list') }}">See all services</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card h-100">
-        <div class="card-body">
-          <h5 class="card-title">Dental & Minor Surgery</h5>
-          <ul class="mb-3">
-            <li>Dental cleans</li>
-            <li>Desexing</li>
-            <li>Soft-tissue procedures</li>
-          </ul>
-          <a class="btn btn-outline-dark btn-sm" href="{{ url_for('service_list') }}">See all services</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card h-100">
-        <div class="card-body">
-          <h5 class="card-title">Farm & Large Animal</h5>
-          <ul class="mb-3">
-            <li>Farm call-outs</li>
-            <li>Hoof trims</li>
-            <li>On-site care</li>
-          </ul>
-          <a class="btn btn-outline-dark btn-sm" href="{{ url_for('service_list') }}">See all services</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="my-4">
-  <h3 class="h4 mb-3">Frequently asked</h3>
-  <div class="accordion" id="faq">
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="h1">
-        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#c1">
-          How do I book?
-        </button>
-      </h2>
-      <div id="c1" class="accordion-collapse collapse show" data-bs-parent="#faq">
-        <div class="accordion-body">
-          Use the <em>Book appointment</em> button or call us—we’ll confirm date, time, and any prep.
-        </div>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="h2">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c2">
-          What if plans change?
-        </button>
-      </h2>
-      <div id="c2" class="accordion-collapse collapse" data-bs-parent="#faq">
-        <div class="accordion-body">
-          Call us as soon as possible and we’ll reschedule with minimal stress for your pet.
-        </div>
-      </div>
-    </div>
-    <div class="accordion-item">
-      <h2 class="accordion-header" id="h3">
-        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c3">
-          Do you take referrals?
-        </button>
-      </h2>
-      <div id="c3" class="accordion-collapse collapse" data-bs-parent="#faq">
-        <div class="accordion-body">
-          Yes—we collaborate with local veterinarians for advanced procedures.
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- optional: upcoming appointments (if provided by view) -->
-{% if upcoming is defined %}
-<section class="my-4">
-  <div class="d-flex justify-content-between align-items-center mb-2">
-    <h3 class="h5 m-0">Upcoming appointments</h3>
-    <a class="btn btn-outline-dark btn-sm" href="{{ url_for('appointment_list') }}">View all</a>
-  </div>
-
-  {% if upcoming %}
-    <div class="table-responsive">
-      <table class="table table-sm table-striped align-middle">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Date &amp; Time</th>
-            <th>Customer</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for a in upcoming %}
-          <tr>
-            <td>{{ a.appt_id }}</td>
-            <td>{{ a.appt_datetime.strftime('%d/%m/%Y %H:%M') }}</td>
-            <td>
-              <a href="{{ url_for('customer_appointment', customer_id=a.customer_id) }}">
-                {{ a.family_name }}, {{ a.first_name }}
-              </a>
-            </td>
-            <td>{{ a.notes or '-' }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-  {% else %}
-    <p class="text-muted mb-0">No upcoming appointments to show.</p>
-  {% endif %}
-</section>
-{% endif %}
-
-<!-- contact / CTA -->
-<section class="my-4 p-3 p-md-4 bg-warning-subtle border rounded">
-  <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
-    <div>
-      <h3 class="h5 m-0">Ready to book?</h3>
-      <div class="small">123 Lincoln Road, Lincoln 7608 • Mon–Fri 9–6, Sat 9–1</div>
-    </div>
-    <div class="d-flex gap-2">
-      <a class="btn btn-warning" href="{{ url_for('new_appointment') }}">Book appointment</a>
-      <a class="btn btn-outline-dark" href="tel:+64-3-555-0123">(03) 555 0123</a>
-    </div>
-  </div>
-</section>
 
 {% endblock %}

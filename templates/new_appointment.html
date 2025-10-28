@@ -8,6 +8,8 @@
 <form method="post" class="needs-validation" novalidate>
   <div class="row g-3">
 
+    
+
     <!-- Customer -->
     <div class="col-md-6">
       <label for="customer_id" class="form-label">Customer</label>
@@ -23,6 +25,8 @@
       <div class="invalid-feedback">Please select a customer.</div>
     </div>
 
+
+
     <!-- Date & Time -->
     <div class="col-md-6">
       <label for="appt_datetime" class="form-label">Date &amp; Time</label>
@@ -35,6 +39,9 @@
       <div class="form-text">Must be in the future and not on a Sunday.</div>
       <div class="invalid-feedback">Please choose a valid future date &amp; time (not Sunday).</div>
     </div>
+    
+
+
 
     <!-- Services -->
     <div class="col-12">
@@ -73,7 +80,10 @@
   </div>
 </form>
 
-<!-- Optional: client-side Sunday warning (server validation still authoritative) -->
+
+
+
+<!-- Warning to the customers about sunday appointment -->
 <script>
   (function() {
     const input = document.getElementById('appt_datetime');
