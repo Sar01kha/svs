@@ -9,7 +9,7 @@ Only Flask, MySQL, and Bootstrap 5 (JavaScript)are used to make the appointments
 ## Steps to read this in VS code
 
 1. **create virtual environment:**
-*view>command palette > python create environment > venv *
+*view*>*command palette* > *python create environment* > *venv*
 
 2.  **Install dependencies** 
 pip install --upgrade pip
