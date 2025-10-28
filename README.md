@@ -7,11 +7,14 @@ This web application will enable employees to handle customers, services, and ap
 Only Flask, MySQL, and Bootstrap 5 (JavaScript)are used to make the appointments.
 
 
-#steps 
+## Steps 
 
-#create virtual environment 
-view>command palette > python create environment > venv > created virtual envrionment
+**Create Virtual Environment:** 
+
+*view > command palette > python create environment > venv > created virtual envrionment*
+
 bash
+
 python -m venv .venv
 Activate: - Windows PowerShell> bash .venv\Scripts/Activate.ps1 -
 MacOS / Linuxbash source.venv/bin/activate
