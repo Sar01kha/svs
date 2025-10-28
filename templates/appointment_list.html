@@ -22,7 +22,7 @@
   <tbody>
     {# loop through all appointments sorted by customer's family name alphabetically #}
     {% for a in appts|sort(attribute='family_name') %}
-    <tr class="{% if a.is_future %}table-success{% endif %}">
+    <tr class="{% if a.is_future %}table-warning{% endif %}">
       <!-- appointment id -->
       <td>{{ a.appt_id }}</td>
 

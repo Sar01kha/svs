@@ -78,12 +78,12 @@ html
 ## Design Decisions 
 1.  The reason why Flask Blueprints was not chosen was to keep things simple (single app).
     file.
-2.  Roads divided logically:services,customers, appointments and report.
+2.  Roads divided logically:services,customers, appointments and report.So, the employer can easily get the right place in one click.
 3.  "GET and POST methods" are used in form processing, GET is used to list.
      POST for insert/update.
 4.  All other templates were based on the extension of Single base.html template. 
     navigable and footer that is consistent.
-5.  Bootstrap Forms were utilized to guarantee intrinsic validation designs.
+5.  The other fields (such as email) are optional and therefore can be used with a null value; date joined is set to a sensible default (or is validated) to prevent any future dates by default.
 6.  MySQL dictionaries and cursors are used to access data through easy field access.
 7.  Customer clickable link loads the appointment summary dynamically using query parameters.
 8.  Check future validation of appointments by Date & time and color  using Python and bootstrap.
@@ -93,8 +93,9 @@ html
     cards.
 12. GROUP BY, COUNT and SUM queries can be used in querying the service summary.
     efficiency.
-
-
+13.The search by customers is an SQL query that orders by family name, first name to keep large lists of customers fast and consistent and we do not write a lot of client side code.
+14. With the HTML5 validation, the user is assisted, whereas the rules are implemented by the Flask route: date should be in the future, not on Sunday, and at least one service should be chosen. Checks are done on the server to prevent bypasses.
+15. Requirements.txt contains only Flask + MySQL client (and similar libs) and are thus easy to set up by markers or teammates.
 
 ## Image source
 
@@ -148,11 +149,9 @@ VALUES (1, 'Buddy', 'Dog', 'Male', '2021-05-10');
 
 
 5. **Discussion** 
-Ideally, the appointments are to be connected to an animal, not.
-only the owner, as there are pets to which the services are applicable. This improves
-record accuracy and enables more than one animal to a customer. However, for
-the simplicity of this project, appointments are also bound to the customer
-to simplify the model and combine requirement.
+
+The simpler design to make, in most cases, is to associate the appointment with the animal in cases where a customer may possess more than one pet. It allows clinical history, procedures, and billing to automatically be tied to the appropriate animal at the same time that they can be accessed through owner_id. It also makes future features like keeping track of weight, microchip numbers, reminders per pet or species specific pricing very easy. It is easier to begin by linking to the customer but then the histories are ambiguous (which pet?) and reporting and reminders are difficult. 
+The clean model gets the following: appointments.appt_id → animals.animal_id → customers.customer_id. On edge cases (walk-ins where animal information is not available but), you can permit an ad hoc temporary record of the animal marked as unknown, or permitting animal id to be a nullable field during intake, and mandatory before finalization.
 
 
 

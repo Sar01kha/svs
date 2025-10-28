@@ -11,13 +11,13 @@ db.init_db(
     app, connect.dbuser, connect.dbpass, connect.dbhost, connect.dbname, connect.dbport
 )
 
-# --------------------------- Home ---------------------------
+# Home
 
 @app.route("/")
 def home():
     return render_template("home.html")
 
-# --------------------------- Services ---------------------------
+# Services
 
 @app.route("/services", methods=["GET"])
 def service_list():
@@ -29,8 +29,10 @@ def service_list():
     flash("Example of a flash message. Optional, but good for error or confirmation messages.", "info")
     return render_template("service_list.html", services=services)
 
-# --------------------------- Customers ---------------------------
 
+
+
+# Customers 
 @app.route("/customers", methods=["GET"])
 def customer_list():
     cursor = db.get_cursor()
@@ -57,6 +59,10 @@ def customer_list():
     cursor.close()
     return render_template("customer_list.html", customers=customers, q=q)
 
+
+
+
+#Customer appointment 
 @app.route("/customers/<int:customer_id>", methods=["GET"])
 def customer_appointment(customer_id):
     cursor = db.get_cursor()
@@ -96,8 +102,10 @@ def customer_appointment(customer_id):
     cursor.close()
     return render_template("customer_appointment.html", customer=customer, appts=appts)
 
-# --------------------------- Appointments ---------------------------
 
+
+
+#Appointments
 @app.route("/appointments", methods=["GET"])
 def appointment_list():
     cursor = db.get_cursor()
@@ -127,13 +135,13 @@ def appointment_list():
     cursor.close()
     return render_template("appointment_list.html", appts=appts)
 
-# --------------------------- Add Customer ---------------------------
 
-# app.py
+
+
+# Add Customer 
 from flask import render_template, request, redirect, url_for, flash
 from datetime import date, datetime
 import db
-
 @app.route("/customers/new", methods=["GET", "POST"])
 def new_customer():
     today = date.today()
@@ -206,8 +214,9 @@ def new_customer():
     return render_template("new_customer.html", today_str=today_str, form_data=None)
 
 
-# --------------------------- Add Appointment ---------------------------
 
+
+# Add Appointment 
 @app.route("/appointments/new", methods=["GET", "POST"])
 def new_appointment():
     cursor = db.get_cursor()
@@ -297,8 +306,10 @@ def new_appointment():
     cursor.close()
     return render_template("new_appointment.html", customers=customers, services=services)
 
-#Edit Customer
 
+
+
+#Edit Customer
 @app.route("/customers/<int:customer_id>/edit", methods=["GET", "POST"])
 def edit_customer(customer_id):
     """Edit: first_name, family_name, email (optional), phone
@@ -382,6 +393,9 @@ def edit_customer(customer_id):
             "phone": customer["phone"] or "",
         }
     )
+
+
+#Service summary report 
 @app.route("/reports/services", methods=["GET"])
 def service_summary_report():
     cursor = db.get_cursor()
