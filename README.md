@@ -7,7 +7,7 @@ This web application will enable employees to handle customers, services, and ap
 Only Flask, MySQL, and Bootstrap 5 (JavaScript)are used to make the appointments.
 
 
-#steps 
+## Steps to read this in VS code
 
 #create virtual environment 
 view>command palette > python create environment > venv > created virtual envrionment
