@@ -11,15 +11,7 @@ Only Flask, MySQL, and Bootstrap 5 (JavaScript)are used to make the appointments
 1. **create virtual environment:**
 *view*>*command palette* > *python create environment* > *venv*
 
-<<<<<<< HEAD
-## Steps 
 
-**Create Virtual Environment:** 
-
-*view > command palette > python create environment > venv > created virtual envrionment*
-
-=======
->>>>>>> 6783956f3b6f5ede71b071212fac198923526901
 2.  **Install dependencies** 
 pip install --upgrade pip
 pip install requirements.txt.
@@ -110,44 +102,44 @@ All the pictures are open access and can be used in the learning process.
 
 1. **Table Creation (customers)**  
  sql
-CREATE TABLE customers (
-  customer id int auto increase primary key,
-  first_name VARCHAR(50),
-  family_name VARCHAR(50),
-  email VARCHAR(100),
-  phone VARCHAR(20),
-  date_joined DATE
+CREATE TABLE customers (  
+customer id int auto increase primary key,  
+  first_name VARCHAR(50),  
+  family_name VARCHAR(50),  
+  email VARCHAR(100),  
+  phone VARCHAR(20),  
+  date_joined DATE  
 );
 
 
 2. **Table Relationships**  
 
  sql
-CREATE Table appointment services (
-  appointment_id INT,
-  service_id INT,
-  PRIMARY KEY (appointment id, service id),
-  FOREIGN KEY (appointment id) REFER to appointments(appointment id),
-  Foreign key (service id) refers to services (service id).
+CREATE Table appointment services (  
+  appointment_id INT,  
+  service_id INT,  
+  PRIMARY KEY (appointment id, service id),  
+  FOREIGN KEY (appointment id) REFER to appointments(appointment id),  
+  Foreign key (service id) refers to services (service id).  
 );
 
 
 3. **New Table - animals**  
  sql
-CREATE TABLE animals (
-  animal_id INT AUTO_INCREMENT PRIMARY KEY,
-  owner_id INT,
-  name VARCHAR(50),
-  species VARCHAR(30),
-  sex VARCHAR(10),
-  date_of_birth DATE,
-  FOREIGN KEY (owner_id) REFERENCES customers(customer_id)
+CREATE TABLE animals (  
+ animal_id INT AUTO_INCREMENT PRIMARY KEY,  
+  owner_id INT,  
+  name VARCHAR(50),  
+  species VARCHAR(30),  
+  sex VARCHAR(10),  
+  date_of_birth DATE,  
+  FOREIGN KEY (owner_id) REFERENCES customers(customer_id)  
 );
 
 
- `Insert Example`
- sql
-INSERT animals (owner id, name, species, sex, date of birth);
+4.**Data Insertion**   
+ sql  
+INSERT animals (owner id, name, species, sex, date of birth);  
 VALUES (1, 'Buddy', 'Dog', 'Male', '2021-05-10');
 
 
@@ -155,6 +147,7 @@ VALUES (1, 'Buddy', 'Dog', 'Male', '2021-05-10');
 
 The simpler design to make, in most cases, is to associate the appointment with the animal in cases where a customer may possess more than one pet. It allows clinical history, procedures, and billing to automatically be tied to the appropriate animal at the same time that they can be accessed through owner_id. It also makes future features like keeping track of weight, microchip numbers, reminders per pet or species specific pricing very easy. It is easier to begin by linking to the customer but then the histories are ambiguous (which pet?) and reporting and reminders are difficult. 
 The clean model gets the following: appointments.appt_id → animals.animal_id → customers.customer_id. On edge cases (walk-ins where animal information is not available but), you can permit an ad hoc temporary record of the animal marked as unknown, or permitting animal id to be a nullable field during intake, and mandatory before finalization.
+
 
 
 
