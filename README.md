@@ -46,11 +46,11 @@ Loads sample data and uses it to create a utility named appointment services.
 4. **Environment variables:**
 The following should be run beforehand:
 bash
-export DB_HOST=`127.0.0.1`
-export DB_PORT=`3306`
-export DB_USER=`root`
-export DB_PASSWORD=`yourpassword`
-export DB_NAME=`svs`
+-export DB_HOST=`127.0.0.1`
+-export DB_PORT=`3306`
+-export DB_USER=`root`
+-export DB_PASSWORD=`yourpassword`
+-export DB_NAME=`svs`
 
 Otherwise, declare them in connect.py.
 
